@@ -1,0 +1,344 @@
+:root {
+            --primary-bg: #0a0a0c;
+            --card-bg: #161b22; 
+            --text-main: #ffffff;
+            --accent-color: #00ff88;
+            --button-hover: #00cc6a; 
+        }
+
+        body {
+            font-family: 'Roboto Mono';
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* Profile Section */
+        .profile-wrapper {
+            width: 150px; /* Set size here once */
+            height: 150px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 100%;  /* Image will always match the wrapper */
+            height: 100%;
+            border-radius: 50%; /* This creates the circle */
+            object-fit: cover; /* This is the MAGIC line: it crops the photo instead of stretching it */  
+            object-position: center; /* Centers the face */
+            border: 3px solid var(--accent-color); /* Adds a professional border */
+        }
+
+        /* Live Status Pulse */
+        .status-dot {
+            position: absolute;
+            /* Adjust these values to nudge the dot along the curve */
+            bottom: 8px;   
+            right: 12px;  
+            width: 18px;   /* Slightly larger dot looks better with a larger photo */
+            height: 18px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            border: 3px solid var(--primary-bg);
+            z-index: 2;    /* Ensures it stays on top */
+        }
+
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #22c55e;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* Typography */
+        h1 { font-family: 'Sora'; font-size: 1.5rem; margin: 10px 0 5px; }
+        .career { color: var(--accent-color); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        .bio { font-size: 0.95rem; color: #94a3b8; margin: 15px 0 10px; line-height: 1.5; }
+
+        .socials{
+            margin: 10px; margin-bottom: 15px;
+        }
+        .socials a{
+            text-decoration: none;
+            color: var(--text-main);
+        }
+        .socials i{
+            font-size: 25px;
+        }
+        .socials i:hover{
+            color: #ffffff77;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .linkshead{
+            color: var(--accent-color);
+            font-size: 16px;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .links-gap { display: flex; flex-direction: column; gap: 15px; margin-top: 40px;}
+
+        .link-card {
+            background-color: var(--card-bg);
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: transform 0.2s, background-color 0.2s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .link-card:hover {
+            border-color: var(--button-hover);
+        }
+
+        /*ANIMATION*/
+        /* Initial state: hidden */
+        .link-card {
+        opacity: 0;
+        transform: scale(0.5);
+        }
+
+        /* Animation state */
+        .link-card.active {
+        animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        70% {
+            transform: scale(1.1);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        }
+        /*ANIMATION END*/
+
+        .hover-button {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden; /* This clips the text sliding in/out */
+        }
+
+        .button-content {
+        display: flex;
+        width: 200%; /* Double width to hold both states side-by-side */
+        height: 100%;
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        /* Start with the Sign up hidden to the left */
+        transform: translateX(-50%); 
+        }
+
+        /* Default state */
+        .state-default {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Hover state */
+        .state-hover {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* The Magic: When button is hovered, slide the content to the right */
+        .hover-button:hover .button-content {
+        transform: translateX(0%);
+        }
+
+        /* Icon Styling */
+        .icon { font-size: 22px; }
+        .arrow { font-size: 20px; }
+
+
+
+        /*signal-box*/
+        .signal-box {
+            background: #1c2128;
+            border: 1px solid var(--button-hover);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 0 0;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .live-indicator {
+            color: var(--accent-color);
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.3; }
+        }
+
+        .signal-btn {
+            display: block;
+            text-align: center;
+            background: var(--button-hover);
+            color: #000;
+            text-decoration: none;
+            padding: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .signal-btn:hover{
+            opacity: 0.3;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /*SAVE CONTACT*/
+        .vcard-btn {
+            margin-top: 30px;
+            background: var(--button-hover);
+            color: var(--primary-bg);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        /*SHARE PROFILE*/
+        .share-btn {
+            margin-top: 15px;
+            background: transparent;
+            color: var(--button-hover);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid var(--button-hover);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background: var(--button-hover);
+            color: var(--primary-bg);
+        }
+
+        /*QR CODE*/
+        .qr-trigger{
+            margin-top: 15px;
+            background: transparent;
+            color: var(--button-hover);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid var(--button-hover);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--container-bg);
+            margin: 15% auto;
+            padding: 25px;
+            border-radius: 20px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .modal-content h2{
+            font-size: 1.1em;
+        }
+
+        .close{
+            cursor: pointer;
+        }
+
+        #qrcode img {
+            margin: 0 auto;
+            border: 10px solid white; /* Ensures scannability on dark themes */
+            border-radius: 10px;
+        }
+
+
+        /*COPYRIGHT & DEVELOPER CREDITS*/
+
+        .site-footer {
+            margin-top: 50px;
+            padding-bottom: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .branding {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .branding a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .branding a:hover {
+            text-decoration: underline;
+        }
+
+
+        
