@@ -1,11 +1,20 @@
-let qrcode = null;
+let qrcodeInstance = null;
 
 function toggleQR() {
     const modal = document.getElementById("qr-modal");
-    modal.style.display = modal.style.display === "block" ? "none" : "block";
+    const qrContainer = document.getElementById("qrcode");
+    
+    // Toggle display
+    if (modal.style.display === "block") {
+        modal.style.display = "none";
+    } else {
+        modal.style.display = "block";
 
-    if (!qrcode) {
-        qrcode = new QRCode(document.getElementById("qrcode"), {
+        // Clear previous QR code to prevent duplicates or errors
+        qrContainer.innerHTML = ""; 
+
+        // Generate new QR code
+        new QRCode(qrContainer, {
             text: window.location.href,
             width: 200,
             height: 200,
